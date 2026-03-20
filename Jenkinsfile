@@ -1,31 +1,41 @@
 pipeline {
     agent any
-    tools { nodejs 'node-latest' }
+    
+    tools {
+        nodejs 'NodeJS' 
+    }
+
     stages {
         stage('Install') {
-            steps { bat 'npm install' }
+            steps {
+                echo 'Крок 1: Встановлення залежностей'
+                bat 'npm install'
+            }
         }
-        stage('Build') {
-            steps { bat 'npm run build' }
+
+        stage('Testing') {
+            steps {
+                echo 'Виконання Тесту 1: Linting...'
+                bat 'npm run lint'
+                
+                echo 'Виконання Тесту 2: Type Checking...'
+                bat 'npx tsc --noEmit'
+                
+                echo 'Виконання Тесту 3: Build Test...'
+                bat 'npm run build'
+            }
         }
     }
-    stage('Testing') {
-    steps {
-        echo 'Тест 1: Linting (Аналіз стилю коду)'
-        bat 'npm run lint'
 
-        echo 'Тест 2: Type Checking (Перевірка TypeScript)'
-        bat 'npx tsc --noEmit'
-
-        echo 'Тест 3: Smoke Test (Спроба зібрати білд)'
-        bat 'npm run build'
-    }
-    }
     post {
         always {
-            junit 'test-results/*.xml'
-            echo 'Формування звіту завершено'
+            echo 'Формування звіту: Тестування завершено.'
+        }
+        success {
+            echo 'РЕЗУЛЬТАТ: Позитивний. Проєкт готовий до роботи.'
+        }
+        failure {
+            echo 'РЕЗУЛЬТАТ: Негативний. Знайдено помилки у коді або тестах.'
         }
     }
 }
-
