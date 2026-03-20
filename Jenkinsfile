@@ -9,8 +9,7 @@ pipeline {
             steps { bat 'npm run build' }
         }
     }
-}
-stage('Testing') {
+    stage('Testing') {
     steps {
         echo 'Тест 1: Linting (Аналіз стилю коду)'
         bat 'npm run lint'
@@ -21,10 +20,12 @@ stage('Testing') {
         echo 'Тест 3: Smoke Test (Спроба зібрати білд)'
         bat 'npm run build'
     }
-}
-post {
-    always {
-        junit 'test-results/*.xml'
-        echo 'Формування звіту завершено'
+    }
+    post {
+        always {
+            junit 'test-results/*.xml'
+            echo 'Формування звіту завершено'
+        }
     }
 }
+
