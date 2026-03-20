@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     parameters {
-        choice(name: 'STUDENT_NAME', choices: ['Yevhenii', 'Oleg', 'Dmitro', 'Anna', 'Serhii'], description: 'Оберіть своє ім’я')
+        choice(name: 'STUDENT_NAME', choices: ['Yevhenii', 'Denis', 'Artem', 'Mykhailo', 'Serhii'], description: 'Оберіть своє ім’я')
         choice(name: 'TEST_SET', choices: ['Set_1_Quality', 'Set_2_Security', 'Set_3_Structure', 'Set_4_Performance', 'Set_5_Deps'], description: 'Оберіть свій набір тестів')
     }
 
