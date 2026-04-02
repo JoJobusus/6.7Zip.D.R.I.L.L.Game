@@ -31,7 +31,7 @@ pipeline {
                             
                         case 'Set_2_Security':
                             echo "Тести Набору 2: Безпека"
-                            bat 'npm audit'
+                            bat 'npm audit --audit-level=critical'
                             bat 'if exist package-lock.json echo Lock_File_Present'
                             bat 'npm outdated'
                             break
