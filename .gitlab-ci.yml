@@ -3,8 +3,8 @@ stages:
   - test
 
 variables:
-  STUDENT_NAME: "Artem"
-  TEST_SET: "Set_3_Structure"
+  STUDENT_NAME: "Denys"
+  TEST_SET: "Set_22Structure"
 
 default:
   image: node:latest
